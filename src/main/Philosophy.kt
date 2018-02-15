@@ -1,14 +1,10 @@
-package main
-
-import main.pages.WikipediaPage
 import kotlin.system.exitProcess
 
 const val VICTORY_TITLE = "Philosophy"
-const val WIKIPEDIA_BASE_PATH = "https://en.wikipedia.org"
 const val RANDOM_ARTICLE_URL = "/wiki/Special:Random"
 
 fun main(args: Array<String>){
-    val randomPage = WikipediaPage(WIKIPEDIA_BASE_PATH + RANDOM_ARTICLE_URL)
+    val randomPage = pages.WikipediaPage(pages.WIKIPEDIA_BASE_PATH + RANDOM_ARTICLE_URL)
     println("Starting article: ${randomPage.title}")
     var currentPage = randomPage.nextPage
     val titles = mutableMapOf<String, Int>()
@@ -25,6 +21,7 @@ fun main(args: Array<String>){
             currentPage = currentPage.nextPage
         } catch (exception: NoSuchElementException) {
             println(exception.message)
+            exitProcess(0);
         }
     }
     println(currentPage.title)
